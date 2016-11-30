@@ -1,0 +1,14 @@
+## THIS FILE IS MANAGED BY PUPPET! DO NOT MODIFY!
+
+## delete all
+-D
+## set buffer size
+-b <%= $auditd::rules_buffer_size %>
+## set failure mode
+-f <%= $auditd::rules_failure_mode %>
+## extra rules to load before any others
+<% unless $auditd::base_rules =~ Undef { -%>
+<% $auditd::base_rules.each |$rule| { -%>
+<%= $rule %>
+<% } -%>
+<% } -%>

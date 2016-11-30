@@ -1,0 +1,8 @@
+## THIS FILE IS MANAGED BY PUPPET! DO NOT MODIFY!
+
+## rules to load after any others; e.g. -e 2
+<% unless $auditd::finalize_rules =~ Undef { -%>
+<% $auditd::finalize_rules.each |$rule| { -%>
+<%= $rule %>
+<% } -%>
+<% } -%>

@@ -1,0 +1,46 @@
+{
+  "name": "nexcess-auditd",
+  "version": "1.0.0",
+  "author": "Nexcess",
+  "summary": "Installs, configures, and manages auditd.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/nexcess/puppet-auditd",
+  "project_page": "https://github.com/nexcess/puppet-auditd",
+  "issues_url": "https://github.com/nexcess/puppet-auditd/issues",
+  "data_provider": "hiera",
+  "tags": [
+    "audit",
+    "auditd"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.5.0 < 5.0.0"
+    }
+  ],
+  "dependencies": [
+  ],
+  "description": "auditd Module for CentOS,RHEL, and Ubuntu."
+}

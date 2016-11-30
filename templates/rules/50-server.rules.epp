@@ -1,0 +1,9 @@
+## THIS FILE IS MANAGED BY PUPPET! DO NOT MODIFY!
+
+## rules specific to a node
+## mostly useful for specifying custom rules for a node, in combination with a main ruleset
+<% unless $auditd::server_rules =~ Undef { -%>
+<% $auditd::server_rules.each |$rule| { -%>
+<%= $rule %>
+<% } -%>
+<% } -%>

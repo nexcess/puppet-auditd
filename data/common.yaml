@@ -1,0 +1,57 @@
+---
+## auditd.conf settings
+auditd::conf: /etc/audit/auditd.conf
+auditd::log_file: /var/log/audit/audit.log
+auditd::log_format: RAW
+auditd::log_group: root
+auditd::priority_boost: 4
+auditd::flush: INCREMENTAL
+auditd::freq: 20
+auditd::num_logs: 5
+auditd::disp_qos: lossy
+auditd::dispatcher: /sbin/audispd
+auditd::name_format: NONE
+auditd::admin_name: ~
+auditd::max_log_file: 6
+auditd::max_log_file_action: ROTATE
+auditd::space_left: 75
+auditd::space_left_action: SYSLOG
+auditd::action_mail_acct: root
+auditd::admin_space_left: 50
+auditd::admin_space_left_action: SUSPEND
+auditd::disk_full_action: SUSPEND
+auditd::disk_error_action: SUSPEND
+auditd::tcp_listen_port: ~
+auditd::tcp_listen_queue: 5
+auditd::tcp_max_per_addr: 1
+auditd::use_libwrap: true
+auditd::tcp_client_ports: ~
+auditd::tcp_client_max_idle: 0
+auditd::enable_krb5: false
+auditd::krb5_principal: auditd
+auditd::krb5_key_file: ~
+
+## service settings
+auditd::service_manage: true
+auditd::service_ensure: running
+auditd::service_enable: true
+auditd::service_name: auditd
+auditd::service_provider: systemd
+
+## package options
+auditd::manage_package: true
+auditd::package_name: audit
+auditd::package_state: present
+
+## rules options
+auditd::use_augenrules: true
+auditd::rulesd_dir: /etc/audit/rules.d
+auditd::purge_rules: true
+auditd::rules_buffer_size: 8192
+auditd::rules_failure_mode: 1
+
+## rulesets
+auditd::base_rules: ~
+auditd::main_rules: ~
+auditd::server_rules: ~
+auditd::finalize_rules: ~
