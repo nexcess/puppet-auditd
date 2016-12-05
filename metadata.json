@@ -1,9 +1,9 @@
 {
   "name": "nexcess-auditd",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Nexcess",
   "summary": "Installs, configures, and manages auditd.",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/nexcess/puppet-auditd",
   "project_page": "https://github.com/nexcess/puppet-auditd",
   "issues_url": "https://github.com/nexcess/puppet-auditd/issues",
