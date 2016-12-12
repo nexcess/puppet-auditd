@@ -10,14 +10,16 @@ class auditd::service inherits auditd {
     ## puppet doesn't really give an easy way to do reloads instead of restarts
     case $auditd::service_provider {
       'systemd': {
-        exec { "systemctl reload ${auditd::service_name}":
+        exec { 'reload auditd':
+          command     => "systemctl reload ${auditd::service_name}",
           path        => ['/sbin', '/bin'],
           subscribe   => File[$auditd::conf],
           refreshonly => true,
         }
       }
       'redhat', default: {
-        exec { "/sbin/service ${auditd::service_name} reload":
+        exec { 'reload auditd':
+          command     => "/sbin/service ${auditd::service_name} reload",
           subscribe   => File[$auditd::conf],
           refreshonly => true,
         }

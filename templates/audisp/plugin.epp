@@ -1,0 +1,9 @@
+## THIS FILE IS MANAGED BY PUPPET! DO NOT MODIFY!
+active = <% if $active { -%>yes<% } else { -%>no<% } %>
+direction = <%= $direction %>
+path = <%= $path %>
+type = <%= $type %>
+<% unless empty($args) { -%>
+args = <%= join($args, ' ') %>
+<% } -%>
+format = <%= $format %>
