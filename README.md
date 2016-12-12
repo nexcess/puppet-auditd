@@ -4,9 +4,10 @@
 
 1. [Module Description ](#module-description)
 2. [Usage - Configuration options and additional functionality](#usage)
-3. [Reference ](#reference)
-4. [Limitations](#limitations)
-5. [Copyright](#copyright)
+3. [Audispd](#audispd)
+4. [Reference ](#reference)
+5. [Limitations](#limitations)
+6. [Copyright](#copyright)
 
 ## Module Description
 
@@ -63,6 +64,18 @@ Due to some implementations of auditd not being able to be fully restarted, conf
 
 Additional service providers may be added in the future.
 
+## Audispd
+
+This module also allows for some basic audispd (audit event multiplexor) configuration.
+
+### Usage
+
+By default, this module will attempt to manage a file at `/etc/audisp/audispd.conf`, and install additional audispd plugins.  You can prevent management of audispd by setting the `auditd::audisp::manage` parameter to `false`.
+
+### Plugins
+
+`auditd::audisp::plugin` is a resource type which can be used to create plugin configuration files.  If the `auditd::audisp::plugins` parameter is not empty, this module will attempt to create a configuration file for the plugin(s) specified in the parameter.
+
 ## Reference
 
 ### Classes
@@ -70,6 +83,7 @@ Additional service providers may be added in the future.
 #### Public Classes
 
 * auditd: Main class, includes all other classes.
+* auditd::audisp::plugins: Class to set up specified audispd plugins.
 
 #### Private Classes
 
@@ -77,6 +91,24 @@ Additional service providers may be added in the future.
 * auditd::config: Handles auditd configuration.
 * auditd::rules: Handles auditd rules.
 * auditd::service: Handles auditd service and rule loading.
+* auditd::audisp: Handles management of audispd
+* auditd::audisp::install: Handles installation of audispd plugins
+* auditd::audisp::config: Handles configuration of audispd
+
+### Types
+
+#### `auditd::audisp::plugin`
+
+This type creates a configuration file for a audispd plugin.  It accepts the following parameters:
+
+  * 'active' - Whether or not the plugin should be activated. Valid options: Boolean. Default value: true
+  * 'direction' - Which direction events flow to the plugin. Valid options: 'in' or 'out'. Default value: 'out'
+  * 'path' - The absolute path to the plugin executable. Valid options: String . Default value: undef
+  * 'type' - How the plugin wants to run. Valid options: 'builtin' or 'always'. Default value: 'always'
+  * 'args' - Maximum of 2 arguments to pass to the child program. Valid options: Array containing strings. Default value: []
+  * 'format' - The format to send events as. Valid options: 'binary' or 'string'. Default value: 'string'
+
+It uses the title of the resource to create a file called "${title}.conf", under the directory specified in [`auditd::audisp::plugindir`](#audit::audisp::plugindir).
 
 ### Parameters
 
@@ -268,11 +300,57 @@ Rules to be loaded after the main rules, to be used for node-specific configurat
 
 Rules to be loaded after any other rule specified. Mainly used if you wanted to lock rules from changing without a reboot. Valid options: list containing strings of rules. Default value: undef
 
+#### `auditd::audisp::manage`
+
+Whether to manage audispd with this module or not. Valid options: Boolean. Default value: true
+
+#### `auditd::audisp::audispd_conf`
+
+The configuration file to use for audispd. Vaild options: String. Default value: '/etc/audisp/audispd.conf'
+
+#### `auditd::audisp::plugindir`
+
+The path to the 'plugins.d' directory for audispd. Valid options: String. Default value: '/etc/audisp/plugins.d'
+
+#### `auditd::audisp::q_depth`
+
+How large the internal queue should be for audispd. Valid options: Numeric. Default value: 80
+
+#### `auditd::audisp::overflow_action`
+
+How audispd should react when its internal queue overflows. Valid options: String. Default value: 'syslog'
+
+#### `auditd::audisp::audispd_priority_boost`
+
+How much of a priority boost audispd should have. Valid options: Postitive Integer. Default value: 4
+
+#### `auditd::audisp::max_restarts`
+
+How many attempts audispd will make to restart crashed plugins. Valid options: Positive Integer. Default value: 10
+
+#### `auditd::audisp::audispd_name_format`
+
+How node names are inserted into event stream. Valid options: String. Default value: hostname
+
+#### `auditd::audisp::audispd_name`
+
+String identifying the machine when using the 'user' name_format. Valid options: String. Default value: undef
+
+#### `auditd::audisp::install_plugins`
+
+Whether to install additional audispd plugins. Valid options: Boolean. Default value: true
+
+#### `auditd::audisp::plugin_package_name`
+
+The name of the package containing the audispd plugins. Valid options: String. Default value: 'audispd-plugins'
+
+#### `auditd::audisp::plugins`
+
+A list of plugins to configure on a server. Vaild options: Hash of plugins and parameters. Default value: undef
+
 ## Limitations
 
 Currently the module is only really useful on systems that have `augenrules` and use the rules.d directory.  While the option is there to disable augenrules, there currently isn't any alternative method implemented.
-
-The module currently does not control `audispd` and it's configuration. This is planned for a future release.
 
 ## Copyright
 

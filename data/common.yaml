@@ -55,3 +55,17 @@ auditd::base_rules: ~
 auditd::main_rules: ~
 auditd::server_rules: ~
 auditd::finalize_rules: ~
+
+## audisp options
+auditd::audisp::manage: true
+auditd::audisp::audispd_conf: /etc/audisp/audispd.conf
+auditd::audisp::plugindir: /etc/audisp/plugins.d
+auditd::audisp::q_depth: 80
+auditd::audisp::overflow_action: syslog
+auditd::audisp::audispd_priority_boost: 4
+auditd::audisp::max_restarts: 10
+auditd::audisp::audispd_name_format: hostname
+auditd::audisp::audispd_name: ~
+auditd::audisp::install_plugins: true
+auditd::audisp::plugin_package_name: audispd-plugins
+auditd::audisp::plugins: ~

@@ -13,6 +13,8 @@ describe 'auditd' do
       it { should contain_class('auditd::config').
            that_comes_before('Class[auditd::rules]') }
       it { should contain_class('auditd::rules').
+           that_comes_before('Class[auditd::audisp]') }
+      it { should contain_class('auditd::audisp').
            that_comes_before('Class[auditd::service]') }
       it { should contain_class('auditd::service') }
 

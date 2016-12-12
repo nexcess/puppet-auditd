@@ -1,0 +1,9 @@
+## THIS FILE IS MANAGED BY PUPPET! DO NOT MODIFY!
+q_depth = <%= $auditd::audisp::q_depth %>
+overflow_action = <%= $auditd::audisp::overflow_action %>
+priority_boost = <%= $auditd::audisp::audispd_priority_boost %>
+max_restarts = <%= $auditd::audisp::max_restarts %>
+name_format = <%= $auditd::audisp::audispd_name_format %>
+<% unless $auditd::audisp::audispd_name =~ Undef { -%>
+name = <%= $auditd::audisp::audispd_name %>
+<% } -%>
