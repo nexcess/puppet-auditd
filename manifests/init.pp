@@ -41,6 +41,7 @@ class auditd (
   Integer $rules_buffer_size,
   Integer[0,2] $rules_failure_mode,
   String $rulesd_dir,
+  String $rules_file,
   Boolean $purge_rules,
   Optional[Array] $base_rules,
   Optional[Array] $main_rules,
