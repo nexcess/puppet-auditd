@@ -49,6 +49,7 @@ auditd::rulesd_dir: /etc/audit/rules.d
 auditd::purge_rules: true
 auditd::rules_buffer_size: 8192
 auditd::rules_failure_mode: 1
+auditd::rules_file: /etc/audit/auditd.rules
 
 ## rulesets
 auditd::base_rules: ~

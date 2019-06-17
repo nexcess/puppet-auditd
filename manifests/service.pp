@@ -30,7 +30,7 @@ class auditd::service inherits auditd {
   if $auditd::use_augenrules == true {
 
     exec { 'augenrules --load':
-      path        => ['/sbin', '/bin'],
+      path        => ['/sbin', '/bin', '/usr/bin'],
       refreshonly => true,
       subscribe   => [  File["${auditd::rulesd_dir}/10-base.rules"],
                         File["${auditd::rulesd_dir}/30-main.rules"],
@@ -38,7 +38,7 @@ class auditd::service inherits auditd {
                         File["${auditd::rulesd_dir}/99-finalize.rules"] ],
     }
 
-    exec { 'auditctl -R /etc/audit/auditd.rules':
+    exec { "auditctl -R ${auditd::rules_file}":
       path        => ['/sbin', '/bin'],
       refreshonly => true,
       subscribe   => Exec['augenrules --load'],
