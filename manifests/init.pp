@@ -55,9 +55,9 @@ class auditd (
   contain auditd::service
   contain auditd::audisp
 
-  Class['::auditd::install'] ->
-  Class['::auditd::config'] ->
-  Class['::auditd::rules'] ->
-  Class['::auditd::audisp'] ->
-  Class['::auditd::service']
+  Class['::auditd::install']
+  -> Class['::auditd::config']
+  -> Class['::auditd::rules']
+  -> Class['::auditd::audisp']
+  -> Class['::auditd::service']
 }

@@ -18,8 +18,8 @@ class auditd::audisp (
     contain auditd::audisp::config
     contain auditd::audisp::plugins
 
-    Class['::auditd::audisp::install'] ->
-    Class['::auditd::audisp::config'] ->
-    Class['::auditd::audisp::plugins']
+    Class['::auditd::audisp::install']
+    -> Class['::auditd::audisp::config']
+    -> Class['::auditd::audisp::plugins']
   }
 }
