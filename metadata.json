@@ -1,13 +1,12 @@
 {
   "name": "nexcess-auditd",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "Nexcess",
   "summary": "Installs, configures, and manages auditd.",
   "license": "Apache-2.0",
   "source": "https://github.com/nexcess/puppet-auditd",
   "project_page": "https://github.com/nexcess/puppet-auditd",
   "issues_url": "https://github.com/nexcess/puppet-auditd/issues",
-  "data_provider": "hiera",
   "tags": [
     "audit",
     "auditd",
@@ -39,7 +38,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.5.0 < 5.0.0"
+      "version_requirement": ">= 4.5.0 < 6.0.0"
     }
   ],
   "dependencies": [
@@ -47,6 +46,5 @@
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 4.0.0 < 5.0.0"
     }
-  ],
-  "description": "auditd and audispd Module for CentOS,RHEL, and Ubuntu."
+  ]
 }
