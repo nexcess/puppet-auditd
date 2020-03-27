@@ -53,11 +53,22 @@ class auditd (
   contain auditd::rules
   contain auditd::config
   contain auditd::service
-  contain auditd::audisp
 
-  Class['::auditd::install']
-  -> Class['::auditd::config']
-  -> Class['::auditd::rules']
-  -> Class['::auditd::audisp']
-  -> Class['::auditd::service']
+  if (($::osfamily == 'RedHat') and ($::operatingsystemmajrelease != '8')) {
+     contain auditd::audisp
+   }
+
+  if (($::osfamily == 'RedHat') and ($::operatingsystemmajrelease != '8')) {
+    Class['::auditd::install'] ->
+    Class['::auditd::config'] ->
+    Class['::auditd::rules'] ->
+    Class['::auditd::audisp'] ->
+    Class['::auditd::service']
+  }else{
+    Class['::auditd::install'] ->
+    Class['::auditd::config'] ->
+    Class['::auditd::rules'] ->
+    Class['::auditd::service']
+  }
+
 }
