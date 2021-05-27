@@ -1,10 +1,11 @@
 ---
 version: 5
-datadir: data
+defaults:
+  datadir: data
+  data_hash: yaml_data
 hierarchy:
   - name: "Major Version"
-    backend: yaml
-    path: "%{facts.os.name}-%{facts.os.release.major}"
+    path: "os/%{facts.os.name}-%{facts.os.release.major}.yaml"
 
-  - name: "common"
-    backend: yaml
+  - name: "common data"
+    path: "common.yaml"
