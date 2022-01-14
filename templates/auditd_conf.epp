@@ -1,6 +1,7 @@
 ## THIS FILE IS MANAGED BY PUPPET! DO NOT MODIFY!
 
 log_file = <%= $auditd::log_file %>
+write_logs = <% if $auditd::write_logs { -%>yes<% } else { -%>no<% } %>
 log_format = <%= $auditd::log_format %>
 log_group = <%= $auditd::log_group %>
 priority_boost = <%= $auditd::priority_boost %>

@@ -1,6 +1,7 @@
 ---
 ## auditd.conf settings
 auditd::conf: /etc/audit/auditd.conf
+auditd::write_logs: yes
 auditd::log_file: /var/log/audit/audit.log
 auditd::log_format: RAW
 auditd::log_group: root
