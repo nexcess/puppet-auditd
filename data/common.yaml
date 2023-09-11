@@ -60,8 +60,8 @@ auditd::finalize_rules: ~
 
 ## audisp options
 auditd::audisp::manage: true
-auditd::audisp::audispd_conf: /etc/audisp/audispd.conf
-auditd::audisp::plugindir: /etc/audisp/plugins.d
+auditd::audisp::audispd_conf: /etc/audit/audispd.conf
+auditd::audisp::plugindir: /etc/audit/plugins.d
 auditd::audisp::q_depth: 80
 auditd::audisp::overflow_action: syslog
 auditd::audisp::audispd_priority_boost: 4
