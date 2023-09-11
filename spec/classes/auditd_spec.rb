@@ -62,7 +62,7 @@ describe 'auditd' do
                         :service_provider => 'systemd',
                         :use_augenrules   => true }}
 
-        describe 'with serice_manage overridden' do
+        describe 'with service_manage overridden' do
           let(:params) {{ :service_manage => false, }}
           it { should_not contain_service('enable auditd') }
           it { should_not contain_exec('reload auditd') }
