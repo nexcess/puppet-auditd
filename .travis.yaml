@@ -1,0 +1,24 @@
+---
+os: linux
+dist: xenial
+language: ruby
+bundler_args: --without development
+before_install: rm Gemfile.lock || true
+services:
+  - docker
+jobs:
+  include:
+    - rvm: 2.5
+      env:
+        - BEAKER_PUPPET_COLLECTION=puppet6
+        - BEAKER_set=docker/centos-7-x64
+      script: bundle exec rake acceptance
+      services: docker
+    - rvm: 2.5
+      env: PUPPET_GEM_VERSION="~> 6.0" STRICT_VARIABLES=yes
+script:
+  - bundle exec rake validate
+  - bundle exec rake lint
+  - bundle exec rake spec SPEC_OPTS='--format documentation'
+notifications:
+  email: false
