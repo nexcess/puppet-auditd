@@ -16,8 +16,15 @@ describe 'auditd::audisp::plugin' do
                       :format    => 'string' }}
       
       it { is_expected.to contain_class('auditd::service') }
-      it { is_expected.to contain_file('/etc/audisp/plugins.d/syslog.conf').
-           with_content(/^active = yes$/) }
+      case facts[:os]["release"]["major"]
+      when '6'
+      when '7'
+        it { is_expected.to contain_file('/etc/audisp/plugins.d/syslog.conf').
+            with_content(/^active = yes$/) }
+      else
+        it { is_expected.to contain_file('/etc/audit/plugins.d/syslog.conf').
+            with_content(/^active = yes$/) }
+      end
 
     end
   end

@@ -1,4 +1,3 @@
 ---
-auditd::service_provider: redhat
 auditd::audisp::audispd_conf: /etc/audisp/audispd.conf
 auditd::audisp::plugindir: /etc/audisp/plugins.d
