@@ -15,7 +15,8 @@ This module installs, and configures the auditd service and ruleset.  The curren
 
   - RHEL 6/7
   - CentOS 6/7
-  - Ubuntu 16.04
+  - Rocky Linux 9
+  - Ubuntu 24.04
 
 By default, the only rules that are applied are the buffer size, and action to take on failure.
 
