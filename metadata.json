@@ -1,6 +1,6 @@
 {
   "name": "nexcess-auditd",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "author": "Nexcess",
   "summary": "Installs, configures, and manages auditd.",
   "license": "Apache-2.0",
