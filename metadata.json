@@ -36,6 +36,12 @@
         "8",
         "9"
       ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "24.04"
+      ]
     }
   ],
   "requirements": [

@@ -73,7 +73,7 @@ describe 'auditd' do
             :name   => 'auditd',
             :enable => true) }
           it { should contain_exec('reload auditd').
-               with_command('systemctl reload auditd') }
+               with_command("/usr/bin/kill -s SIGHUP $(systemctl show --property MainPID auditd | cut -d '=' -f 2 | grep -v '0')") }
           it { should contain_exec('augenrules --load') }
           it { should contain_exec('auditctl -R /etc/audit/auditd.rules') }
         end
@@ -82,7 +82,7 @@ describe 'auditd' do
           context 'when set to systemd' do
             let(:params) {{ :service_provider => 'systemd' }}
             it { should contain_exec('reload auditd').
-                 with_command('systemctl reload auditd') }
+                 with_command("/usr/bin/kill -s SIGHUP $(systemctl show --property MainPID auditd | cut -d '=' -f 2 | grep -v '0')") }
             it { should_not contain_exec('reload auditd').
                  with_command('/sbin/service auditd reload') }
           end
@@ -91,7 +91,7 @@ describe 'auditd' do
             it { should contain_exec('reload auditd').
                  with_command('/sbin/service auditd reload') }
             it { should_not contain_exec('reload auditd').
-                 with_command('systemctl reload auditd') }
+                 with_command("/usr/bin/kill -s SIGHUP $(systemctl show --property MainPID auditd | cut -d '=' -f 2 | grep -v '0')") }
           end
           context 'when set to foo' do
             let(:params) {{ :service_provider => 'foo' }}

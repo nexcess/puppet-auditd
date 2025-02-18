@@ -7,11 +7,13 @@ class auditd::service inherits auditd {
       enable => $auditd::service_enable,
     }
 
-    ## puppet doesn't really give an easy way to do reloads instead of restarts
     case $auditd::service_provider {
       'systemd': {
+        # SIGHUP triggers auditd to do a "reconfigure" where it reads the configuration from disk
+        # the "grep -v '0'" is to have it do nothing in the case where systemd returns a default value for the pid
+        # systemd will return 0 as the pid when for example the unit specified does not exist on the system
         exec { 'reload auditd':
-          command     => "systemctl reload ${auditd::service_name}",
+          command     => "/usr/bin/kill -s SIGHUP $(systemctl show --property MainPID ${auditd::service_name} | cut -d '=' -f 2 | grep -v '0')",
           path        => ['/sbin', '/bin'],
           subscribe   => File[$auditd::conf],
           refreshonly => true,
