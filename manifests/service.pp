@@ -13,7 +13,7 @@ class auditd::service inherits auditd {
         # the "grep -v '0'" is to have it do nothing in the case where systemd returns a default value for the pid
         # systemd will return 0 as the pid when for example the unit specified does not exist on the system
         exec { 'reload auditd':
-          command     => "/usr/bin/kill -s SIGHUP $(systemctl show --property MainPID ${auditd::service_name} | cut -d '=' -f 2 | grep -v '0')",
+          command     => "/usr/bin/kill -s SIGHUP $(systemctl show --property MainPID ${auditd::service_name} | cut -d '=' -f 2 | grep -vE '^0$')",
           path        => ['/sbin', '/bin'],
           subscribe   => File[$auditd::conf],
           refreshonly => true,
